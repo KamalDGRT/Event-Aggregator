@@ -1,0 +1,139 @@
+1. Removed the content of console/migrations/m130524_201442_init.php
+2. Modified it to create the table `role`
+3. Executed this command: php yii migrate/create create_user_table
+4. That created a default file to create the user table.
+5. Modified it to create the user table.
+6. Removed console/migrations/m190124_110200_add_verification_token_column_to_user_table
+
+7. Table: event
+
+php yii migrate/create create_event_table --fields=" \
+title:string(256):notNull, \
+description:text:notNull,  \
+host:string(256):notNull,   \
+venue:string(256):notNull,  \
+d_o_e:integer(11):notNull,   \
+time:string(20):notNull,    \
+status:integer(4):notNull, \
+created_at:integer(11),     \
+created_by:integer(11):foreignKey(user),  \
+updated_at:integer(11), \
+updated_by:integer(11):foreignKey(user)"
+
+
+8. Table: faq
+
+php yii migrate/create create_faq_table --fields="\
+event_id:integer(11):foreignKey(event),   \
+question:string(256):notNull,   \
+answer:text:notNull,   \
+created_at:integer(11),   \
+created_by:integer(11):foreignKey(user),   \
+updated_at:integer(11),  \
+updated_by:integer(11):foreignKey(user)"
+
+9. Table: instruction
+
+php yii migrate/create create_instruction_table --fields="\
+event_id:integer(11):foreignKey(event),   \
+description:string(256):notNull,   \
+priority:integer(4):notNull,   \
+created_at:integer(11),   \
+created_by:integer(11):foreignKey(user),   \
+updated_at:integer(11),  \
+updated_by:integer(11):foreignKey(user)"
+
+10. Table: social
+
+php yii migrate/create create_social_table --fields="\
+event_id:integer(11):foreignKey(event),\
+type:integer(6):notNull,\
+link:string(512):notNull,\
+img_link:string(512):notNull,\
+created_at:integer(11),   \
+created_by:integer(11):foreignKey(user),   \
+updated_at:integer(11),  \
+updated_by:integer(11):foreignKey(user)"
+
+11. Table: social_type
+
+php yii migrate/create create_social_type_table --fields="\
+description:string(512):notNull,   \
+created_at:integer(11),   \
+created_by:integer(11):foreignKey(user),   \
+updated_at:integer(11),  \
+updated_by:integer(11):foreignKey(user)"
+
+
+12. Table: contact
+
+php yii migrate/create create_contact_table --fields="\
+event_id:integer(11):foreignKey(event),   \
+p_name:string(512):notNull,   \
+p_phone:string(30):notNull,   \
+p_email:string(512):notNull,   \
+created_at:integer(11),   \
+created_by:integer(11):foreignKey(user),   \
+updated_at:integer(11),  \
+updated_by:integer(11):foreignKey(user)"
+
+13: Table: timeline
+
+php yii migrate/create create_timeline_table --fields="\
+event_id:integer(11):foreignKey(event),   \
+d_o_e:string(64):notNull,   \
+time:string(16):notNull,   \
+description:string(256):notNull,   \
+priority:integer(4):notNull,   \
+created_at:integer(11),   \
+created_by:integer(11):foreignKey(user),   \
+updated_at:integer(11),  \
+updated_by:integer(11):foreignKey(user)"
+
+
+14. Table: backer
+
+php yii migrate/create create_backer_table --fields="\
+event_id:integer(11):foreignKey(event),\
+type:integer(6):notNull,\
+link:string(512):notNull,\
+img_link:string(512):notNull,\
+b_type:integer(4):notNull,\
+created_at:integer(11),\
+created_by:integer(11):foreignKey(user),\
+updated_at:integer(11),\
+updated_by:integer(11):foreignKey(user)"
+
+15. Table: backer_type
+
+php yii migrate/create create_backer_type_table --fields="\
+description:string(512):notNull,   \
+created_at:integer(11),   \
+created_by:integer(11):foreignKey(user),   \
+updated_at:integer(11),  \
+updated_by:integer(11):foreignKey(user)"
+
+
+16: Table: prize
+
+php yii migrate/create create_prize_table --fields="\
+event_id:integer(11):foreignKey(event),   \
+title:string(32):notNull,   \
+prize:string(128):notNull,   \
+caption:string(128):notNull,   \
+created_at:integer(11),   \
+created_by:integer(11):foreignKey(user),   \
+updated_at:integer(11),  \
+updated_by:integer(11):foreignKey(user)"
+
+17. Table: feedback
+
+php yii migrate/create create_feeback_table --fields="\
+event_id:integer(11):foreignKey(event),   \
+feedback:text:notNull,   \
+rating:integer(5):notNull,   \
+caption:string(128):notNull,   \
+created_at:integer(11),   \
+created_by:integer(11):foreignKey(user),   \
+updated_at:integer(11),  \
+updated_by:integer(11):foreignKey(user)"
