@@ -22,7 +22,7 @@ class m210506_094204_create_user_table extends Migration
             'id' => $this->integer()->notNull(),
             'username' => $this->string()->notNull()->unique(),
             'email' => $this->string()->notNull()->unique(),
-            'role' => $this->integer()->notNull()->defaultValue(10),
+            'role' => $this->integer()->notNull()->defaultValue(2),
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
 
             'auth_key' => $this->string(32)->notNull(),
@@ -49,9 +49,11 @@ class m210506_094204_create_user_table extends Migration
             '{{%user}}',
             'role',
             '{{%role}}',
-            'role_code',
+            'id',
             'CASCADE'
         );
+
+        $this->alterColumn('{{%user}}', 'id', $this->integer() . ' NOT NULL AUTO_INCREMENT');
     }
 
     /**

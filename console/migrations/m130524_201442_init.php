@@ -14,13 +14,26 @@ class m130524_201442_init extends Migration
 
         $this->createTable('{{%role}}', [
             'id' => $this->primaryKey(),
-            'role_code' => $this->integer()->notNull()->unique(),
             'rolename' => $this->string()->notNull()->unique(),
             'description' => $this->text(),
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ], $tableOptions);
+
+        $this->insert('{{%role}}', [
+            'rolename' => 'Admin',
+            'description' => 'Admnistrator',
+            'created_at' => time(),
+            'updated_at' => time()
+        ]);
+
+        $this->insert('{{%role}}', [
+            'rolename' => 'Normal',
+            'description' => 'Normal User',
+            'created_at' => time(),
+            'updated_at' => time()
+        ]);
     }
 
     public function down()
